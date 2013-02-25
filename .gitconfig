@@ -7,6 +7,7 @@
     lga = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     st = status -sb
     co = checkout
+    gr = grep --color
 [color]
 	diff = auto
 	status = auto
