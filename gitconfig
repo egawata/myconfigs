@@ -8,9 +8,12 @@
     st = status -sb
     co = checkout
     gr = grep --color
+    pullr = pull --rebase
+    br = branch
 [color]
 	diff = auto
 	status = auto
 	branch = auto
 [core]
 	excludesfile = /home/egawata/.gitignore
+	editor = vim -c \"set fenc=utf-8\"

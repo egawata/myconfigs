@@ -22,3 +22,6 @@ iab pmod <esc>:r ~/.code_templates/perl_module.pl<return><esc>
 iab papp <esc>:r ~/.code_templates/perl_application.pl<return><esc>
 
 au BufNewFile,BufRead *.t set filetype=perl 
+
+set listchars=tab:>-
+set list
