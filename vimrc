@@ -14,7 +14,14 @@ set indentkeys={,0},:,!^F,o,O,e
 set cinoptions=#1
 set ambiwidth=double
 set number
-set cursorline
+set hls
+set ambiwidth=double
+
+augroup vimrc-auto-cursorline
+    autocmd!
+    autocmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
+    autocmd CursorHold,CursorHoldI * setlocal cursorline
+augroup END
 
 autocmd FileType perl inoremap # X#
 
