@@ -1,7 +1,8 @@
 [user]
 	name = Egawa Takashi
 [alias]
-	show-graph = log --graph --abbrev-commit --pretty=oneline
+    show-graph = log --graph --abbrev-commit --pretty=oneline
+    l = log
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     lga = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     st = status -sb
@@ -11,6 +12,12 @@
     gr = grep --color
     pullr = pull --rebase
     br = branch
+    au = update-index --assume-unchanged
+    nau = update-index --no-assume-unchanged
+    sts = stash
+    stp = stash pop
+    di = diff
+    h = help
 [color]
 	diff = auto
 	status = auto
