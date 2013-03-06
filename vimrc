@@ -30,6 +30,11 @@ iab papp <esc>:r ~/.code_templates/perl_application.pl<return><esc>
 
 au BufNewFile,BufRead *.t set filetype=perl 
 
+hi DiffAdd    ctermfg=black ctermbg=2
+hi DiffChange ctermfg=black ctermbg=3
+hi DiffDelete ctermfg=black ctermbg=6
+hi DiffText   ctermfg=black ctermbg=7
+
 set listchars=tab:>-
 set list
 
