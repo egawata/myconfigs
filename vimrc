@@ -16,6 +16,7 @@ set ambiwidth=double
 set number
 set hls
 set ambiwidth=double
+set nowrapscan
 
 augroup vimrc-auto-cursorline
     autocmd!
