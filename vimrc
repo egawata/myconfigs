@@ -1,22 +1,27 @@
-set ts=4
-set sw=4
-set softtabstop=4
+set tabstop=4
 set expandtab
-set incsearch
+set incsearch  
+set smarttab
+set softtabstop=4
+set shiftwidth=4
 set scrolloff=5
 set showmatch
 set statusline=%F%m%r%h\ %y%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%=%c:%l/%L
 set laststatus=2
-set smartindent
 set nocindent
 set comments=sl:/*,mb:*,elx:*/
 set indentkeys={,0},:,!^F,o,O,e
 set cinoptions=#1
 set ambiwidth=double
+set smartindent
 set number
 set hls
 set ambiwidth=double
 set nowrapscan
+set foldmethod=syntax
+let perl_fold=1
+set foldlevel=2
+set foldnestmax=2
 
 augroup vimrc-auto-cursorline
     autocmd!
