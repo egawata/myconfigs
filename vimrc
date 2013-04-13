@@ -8,12 +8,12 @@ set scrolloff=5
 set showmatch
 set statusline=%F%m%r%h\ %y%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%=%c:%l/%L
 set laststatus=2
+set smartindent
 set nocindent
 set comments=sl:/*,mb:*,elx:*/
 set indentkeys={,0},:,!^F,o,O,e
 set cinoptions=#1
 set ambiwidth=double
-set smartindent
 set number
 set hls
 set ambiwidth=double
@@ -33,6 +33,7 @@ autocmd FileType perl inoremap # X#
 
 iab pmod <esc>:r ~/.code_templates/perl_module.pl<return><esc>
 iab papp <esc>:r ~/.code_templates/perl_application.pl<return><esc>
+iab test_mysqld <esc>:r ~/.code_templates/test_mysqld.pl<return><esc>
 
 au BufNewFile,BufRead *.t set filetype=perl 
 
