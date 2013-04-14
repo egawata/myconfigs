@@ -45,6 +45,8 @@ hi DiffText   ctermfg=black ctermbg=7
 set listchars=tab:>-
 set list
 
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
 
 "
 "  Change status line color in insert mode
