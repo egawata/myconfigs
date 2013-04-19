@@ -9,6 +9,7 @@
     co = checkout
     cm = commit
     ca = commit --amend
+    cmm = commit -m
     gr = grep --color
     pullr = pull --rebase
     br = branch
