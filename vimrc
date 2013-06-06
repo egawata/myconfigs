@@ -22,6 +22,8 @@ set foldmethod=syntax
 let perl_fold=1
 set foldlevel=2
 set foldnestmax=2
+set ignorecase
+set smartcase
 
 augroup vimrc-auto-cursorline
     autocmd!
