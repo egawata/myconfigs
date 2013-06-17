@@ -91,3 +91,12 @@ function! s:GetHighlight(hi)
 endfunction
 
 
+"  Run editing source
+command! Perl call s:Perl()
+nmap <F8> :Perl<CR>
+
+function! s:Perl()
+  :w
+  :!perl % 
+endfunction 
+
