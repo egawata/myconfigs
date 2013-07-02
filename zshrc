@@ -94,6 +94,15 @@ PROMPT2="%{${fg[green]}%}%_> %{${reset_color}%}"
 SPROMPT="%{${fg[red]}%}correct: %R -> %r [nyae]? %{${reset_color}%}"
 RPROMPT="%{${fg[green]}%}[%~]%{${reset_color}%}"
 
-alias grep="grep --color"
+
+alias vi=vim
+
+alias ls='ls --color=auto'
+alias ll='ls -l'
+alias la='ls -la'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 alias ngrep="grep -nrI"
 
