@@ -106,3 +106,22 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias ngrep="grep -nrI"
 
+export LANG=ja_JP.UTF-8
+
+[ -f ~/.zshrc.include ] && source ~/.zshrc.include
+
+if [ -f ~/.zsh/git-prompt.sh ]; then
+    source ~/.zsh/git-prompt.sh
+    setopt PROMPT_SUBST
+    setopt TRANSIENT_RPROMPT
+    precmd() {
+        PROMPT="%{${fg[green]}%}[%n@%m:$(__git_ps1 "%s")] %(!.#.$) %{${reset_color}%}"
+    }
+    GIT_PS1_SHOWDIRTYSTATE=1
+    GIT_PS1_SHOWSTASHSTATE=1
+    GIT_PS1_SHOWUNTRACKEDFILES=0
+    GIT_PS1_SHOWUPSTREAM="auto"
+    GIT_PS1_DESCRIBE_STYLE="default"
+    GIT_PS1_SHOWCOLORHINTS=1
+fi
+
