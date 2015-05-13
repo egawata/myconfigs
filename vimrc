@@ -93,12 +93,19 @@ endfunction
 
 "  Run editing source
 command! Perl call s:Perl()
-nmap <F8> :Perl<CR>
-
 function! s:Perl()
   :w
   :!perl % 
 endfunction 
+
+command! Python call s:Python()
+function! s:Python()
+  :w
+  :!python3 % 
+endfunction 
+
+autocmd FileType perl nmap <F8> :Perl<CR>
+autocmd FileType python nmap <F8> :Python<CR>
 
 
 function! s:pm_template()
