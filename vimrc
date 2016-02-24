@@ -24,6 +24,13 @@ set foldlevel=2
 set foldnestmax=2
 set ignorecase
 set smartcase
+filetype plugin on
+
+set ttyfast
+set lazyredraw
+
+set splitbelow
+set splitright
 
 augroup vimrc-auto-cursorline
     autocmd!
