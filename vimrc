@@ -133,3 +133,21 @@ function! s:pm_template()
 endfunction
 autocmd BufNewFile *.pm call s:pm_template()
 
+
+"
+"  vim-plug  https://github.com/junegunn/vim-plug
+"
+"  To install vim-plug, execute the command below.
+"
+"  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"
+"  Then launch vim and :PlugInstall to install plugins
+"
+call plug#begin('~/.vim/plugged')
+Plug 'mbbill/undotree'
+call plug#end()
+
+
+
+
