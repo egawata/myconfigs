@@ -1,0 +1,13 @@
+#!/bin/bash
+
+BRANCH=$(git symbolic-ref --short HEAD)
+
+if [ ! $BRANCH ]; then
+    echo 'Maybe current directory is not in git repository.'
+    exit -1
+fi
+
+git pull origin $BRANCH
+
+
+
