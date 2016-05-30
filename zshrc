@@ -125,3 +125,5 @@ if [ -f ~/.zsh/git-prompt.sh ]; then
     GIT_PS1_SHOWCOLORHINTS=1
 fi
 
+alias currbr='git rev-parse --abbrev-ref @'
+
