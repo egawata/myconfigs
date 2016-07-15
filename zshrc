@@ -127,3 +127,5 @@ fi
 
 alias currbr='git rev-parse --abbrev-ref @'
 
+[ -f ~/.zshrc.plenv ] && source ~/.zshrc.plenv
+
