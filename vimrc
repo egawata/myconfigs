@@ -190,4 +190,6 @@ endif
 "  .jsx 以外のファイルにもJSXを適用
 let g:jsx_ext_required = 0
 
-
+"  gist 設定
+let g:gist_post_private = 1
+"let g:gist_open_browser_after_post = 1
