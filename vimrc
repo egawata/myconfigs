@@ -134,20 +134,60 @@ endfunction
 autocmd BufNewFile *.pm call s:pm_template()
 
 
-"
-"  vim-plug  https://github.com/junegunn/vim-plug
-"
-"  To install vim-plug, execute the command below.
-"
-"  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"
-"  Then launch vim and :PlugInstall to install plugins
-"
-call plug#begin('~/.vim/plugged')
-Plug 'mbbill/undotree'
-call plug#end()
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 
+"
+"  dein.vim
+"
+
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=/home/egawata/.vim/dein/repos/github.com/Shougo/dein.vim
+
+" Required:
+if dein#load_state('/home/egawata/.vim/dein')
+  call dein#begin('/home/egawata/.vim/dein')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('/home/egawata/.vim/dein/repos/github.com/Shougo/dein.vim')
+
+  call dein#add('Shougo/dein.vim')
+  call dein#add('Shougo/neocomplete.vim')
+  call dein#add('fatih/vim-go')
+  call dein#add('mileszs/ack.vim')
+  call dein#add('jbgutierrez/vim-babel')
+  call dein#add('kchmck/vim-coffee-script')
+  call dein#add('leafgarland/typescript-vim')
+  " ES6対応
+  call dein#add('othree/yajs.vim')
+  " ES7対応
+  call dein#add('othree/es.next.syntax.vim')
+  " JSX
+  call dein#add('mxw/vim-jsx')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+if dein#check_install()
+  call dein#install()
+endif
+
+"
+"  end of dein.vim
+"
+
+"  .jsx 以外のファイルにもJSXを適用
+let g:jsx_ext_required = 0
 
 
