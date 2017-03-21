@@ -170,6 +170,11 @@ if dein#load_state('/home/egawata/.vim/dein')
   " JSX
   call dein#add('mxw/vim-jsx')
 
+  call dein#add('mattn/webapi-vim')
+  call dein#add('mattn/gist-vim')
+
+  call dein#add('chase/vim-ansible-yaml')
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -193,3 +198,8 @@ let g:jsx_ext_required = 0
 "  gist 設定
 let g:gist_post_private = 1
 "let g:gist_open_browser_after_post = 1
+
+"  vim-ansible-yaml 
+"  Ctrl-k でドキュメント検索
+let g:ansible_options = {'documentation_mapping': '<C-K>'}
+
