@@ -32,6 +32,13 @@ set lazyredraw
 set splitbelow
 set splitright
 
+"  Colorscheme
+set t_Co=256
+autocmd ColorScheme * highlight VisualNOS ctermfg=224 ctermbg=61
+autocmd ColorScheme * highlight Visual ctermfg=224 ctermbg=61
+colorscheme molokai
+highlight Normal ctermbg=none
+
 augroup vimrc-auto-cursorline
     autocmd!
     autocmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
@@ -175,6 +182,14 @@ if dein#load_state('/home/egawata/.vim/dein')
 
   call dein#add('chase/vim-ansible-yaml')
 
+  call dein#add('rcmdnk/vim-markdown')
+  call dein#add('Shougo/unite.vim')
+  call dein#add('tomasr/molokai')
+  call dein#add('nathanaelkane/vim-indent-guides')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('tomtom/tcomment_vim')
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -202,4 +217,18 @@ let g:gist_post_private = 1
 "  vim-ansible-yaml 
 "  Ctrl-k でドキュメント検索
 let g:ansible_options = {'documentation_mapping': '<C-K>'}
+
+"  vim-markdown
+let g:vim_markdown_folding_disabled = 1
+
+" indent-guides
+"let g:indent_guides_guide_size = 1
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_start_lebel = 2
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=237
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=236
+
+"  Nerd tree
+command Nt NERDTreeToggle
 
