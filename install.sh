@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [ ! -d ~/.vim/dein/repos/github.com/Shougo/dein.vim ]; then
     mkdir -p ~/.vim/dein/repos/github.com/Shougo/dein.vim
     git clone https://github.com/Shougo/dein.vim.git \
@@ -7,7 +9,9 @@ if [ ! -d ~/.vim/dein/repos/github.com/Shougo/dein.vim ]; then
 fi
 
 mkdir -p ~/git
-git clone https://github.com/egawata/myconfigs.git ~/git/myconfigs
+if [ ! -d ~/git/myconfigs ]; then
+    git clone https://github.com/egawata/myconfigs.git ~/git/myconfigs
+fi
 
 cd ~/git/myconfigs
 if [ ! -f ~/.vimrc ]; then
@@ -19,7 +23,7 @@ fi
 if [ ! -f ~/.gitconfig ]; then
     cp gitconfig ~/.gitconfig
 fi
-if [ ! -d ~/bin ];
+if [ ! -d ~/bin ]; then
     cp -R bin ~/bin
 fi
 
