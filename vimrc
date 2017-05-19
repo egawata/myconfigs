@@ -188,6 +188,7 @@ if dein#load_state('/home/egawata/.vim/dein')
   call dein#add('nathanaelkane/vim-indent-guides')
   call dein#add('scrooloose/nerdtree')
   call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
   call dein#add('tomtom/tcomment_vim')
 
   " Required:
