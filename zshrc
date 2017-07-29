@@ -53,8 +53,8 @@ setopt hist_verify
 setopt numeric_glob_sort
 ## 出力時8ビットを通す
 setopt print_eight_bit
-## ヒストリを共有(しない)
-#setopt share_history
+## ヒストリを共有
+setopt share_history
 ## 補完候補のカーソル選択を有効に
 zstyle ':completion:*:default' menu select=1
 ## 補完候補の色づけ
