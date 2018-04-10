@@ -1,6 +1,6 @@
 set tabstop=4
 set expandtab
-set incsearch  
+set incsearch
 set smarttab
 set softtabstop=4
 set shiftwidth=4
@@ -51,9 +51,9 @@ iab pmod <esc>:r ~/.code_templates/perl_module.pl<return><esc>
 iab papp <esc>:r ~/.code_templates/perl_application.pl<return><esc>
 iab test_mysqld <esc>:r ~/.code_templates/test_mysqld.pl<return><esc>
 
-au BufNewFile,BufRead *.t set filetype=perl 
-au BufNewFile,BufRead *.psgi set filetype=perl 
-au BufNewFile,BufRead *.tt set filetype=html 
+au BufNewFile,BufRead *.t set filetype=perl
+au BufNewFile,BufRead *.psgi set filetype=perl
+au BufNewFile,BufRead *.tt set filetype=html
 
 hi DiffAdd    ctermfg=black ctermbg=2
 hi DiffChange ctermfg=black ctermbg=3
@@ -109,14 +109,14 @@ endfunction
 command! Perl call s:Perl()
 function! s:Perl()
   :w
-  :!perl % 
-endfunction 
+  :!perl %
+endfunction
 
 command! Python call s:Python()
 function! s:Python()
   :w
-  :!python3 % 
-endfunction 
+  :!python3 %
+endfunction
 
 autocmd FileType perl nmap <F8> :Perl<CR>
 autocmd FileType python nmap <F8> :Python<CR>
@@ -190,6 +190,7 @@ if dein#load_state('/home/egawata/.vim/dein')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('tomtom/tcomment_vim')
+  call dein#add('tpope/vim-fugitive')
 
   " Required:
   call dein#end()
@@ -215,7 +216,7 @@ let g:jsx_ext_required = 0
 let g:gist_post_private = 1
 "let g:gist_open_browser_after_post = 1
 
-"  vim-ansible-yaml 
+"  vim-ansible-yaml
 "  Ctrl-k でドキュメント検索
 let g:ansible_options = {'documentation_mapping': '<C-K>'}
 
@@ -232,4 +233,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=236
 
 "  Nerd tree
 command Nt NERDTreeToggle
+
+"  remove trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//ge
 
