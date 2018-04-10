@@ -61,6 +61,8 @@ zstyle ':completion:*:default' menu select=1
 eval `dircolors`
 export ZLS_COLORS=$LS_COLORS
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+## 補完の大文字小文字を区別しない
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 ## ディレクトリ名だけで cd
 setopt auto_cd
 ## カッコの対応などを自動的に補完
