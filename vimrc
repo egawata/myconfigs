@@ -237,3 +237,9 @@ command Nt NERDTreeToggle
 "  remove trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//ge
 
+"  grep 後に quickfix を開く
+augroup qf_win
+  autocmd!
+  autocmd QuickfixCmdPost [^l]* copen
+  autocmd QuickfixCmdPost l* lopen
+augroup END
