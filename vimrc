@@ -243,3 +243,11 @@ augroup qf_win
   autocmd QuickfixCmdPost [^l]* copen
   autocmd QuickfixCmdPost l* lopen
 augroup END
+
+nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
+
+" Highlight and replace under cursor
+nmap # <Space><Space>:%s/<C-r>///g<Left><Left>
+
+nnoremap x "_x
+nnoremap s "_s

@@ -21,6 +21,7 @@
     di = diff
     h = help
     sb = show-branch
+    dc = diff --cached
 [color]
 	diff = auto
 	status = auto
