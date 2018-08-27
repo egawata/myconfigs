@@ -192,6 +192,8 @@ if dein#load_state('/home/egawata/.vim/dein')
   call dein#add('tomtom/tcomment_vim')
   call dein#add('tpope/vim-fugitive')
 
+  call dein#add('simeji/winresizer')
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -232,7 +234,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=237
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=236
 
 "  Nerd tree
-command Nt NERDTreeToggle
+command! Nt NERDTreeToggle
 
 "  remove trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//ge
@@ -244,6 +246,14 @@ augroup qf_win
   autocmd QuickfixCmdPost l* lopen
 augroup END
 
+command! OpenModuleUnderCursor call s:OpenModuleUnderCursor()
+function! s:OpenModuleUnderCursor()
+    silent normal "zyiw
+    let a:filePath = 'lib/' . substitute(@z, '::', '/', 'g') . '.pm'
+    exe 'tabe ' . a:filePath
+endfunction
+autocmd FileType perl nmap <F7> :OpenModuleUnderCursor<CR>
+
 nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
 
 " Highlight and replace under cursor
@@ -251,9 +261,26 @@ nmap # <Space><Space>:%s/<C-r>///g<Left><Left>
 
 nnoremap x "_x
 nnoremap s "_s
+" winresizer
+let g:winresizer_vert_resize = 1
+let g:winresizer_horiz_resize = 1
 
 augroup HighlightTrailingSpaces
   autocmd!
   autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
   autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
+augroup END
+
+inoremap { {}<Left>
+inoremap {<Enter> {}<Left><CR><ESC><S-o>
+inoremap ( ()<ESC>i
+inoremap (<Enter> ()<Left><CR><ESC><S-o>
+inoremap ' ''<LEFT>
+inoremap " ""<LEFT>
+
+"  grep 後に quickfix を開く
+augroup qf_win
+  autocmd!
+  autocmd QuickfixCmdPost [^l]* copen
+  autocmd QuickfixCmdPost l* lopen
 augroup END
