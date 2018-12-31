@@ -11,13 +11,10 @@
     ca = commit --amend
     cmm = commit -m
     gr = grep --color
-    pullr = pull --rebase
     br = branch
     bra = branch -a
     au = update-index --assume-unchanged
     nau = update-index --no-assume-unchanged
-    sts = stash
-    stp = stash pop
     di = diff
     h = help
     sb = show-branch
