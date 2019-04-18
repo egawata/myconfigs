@@ -24,6 +24,7 @@ set foldlevel=2
 set foldnestmax=2
 set ignorecase
 set smartcase
+set backspace=indent,eol,start
 filetype plugin on
 
 set ttyfast
@@ -32,11 +33,6 @@ set lazyredraw
 set splitbelow
 set splitright
 
-"  Colorscheme
-set t_Co=256
-autocmd ColorScheme * highlight VisualNOS ctermfg=224 ctermbg=61
-autocmd ColorScheme * highlight Visual ctermfg=224 ctermbg=61
-colorscheme molokai
 highlight Normal ctermbg=none
 
 augroup vimrc-auto-cursorline
@@ -166,6 +162,7 @@ if dein#load_state('/home/egawata/.vim/dein')
   call dein#add('Shougo/dein.vim')
   call dein#add('Shougo/neocomplete.vim')
   call dein#add('fatih/vim-go')
+  call dein#add('ctrlpvim/ctrlp.vim')
   call dein#add('mileszs/ack.vim')
   call dein#add('jbgutierrez/vim-babel')
   call dein#add('kchmck/vim-coffee-script')
@@ -210,6 +207,13 @@ endif
 "
 "  end of dein.vim
 "
+
+"  Colorscheme
+set t_Co=256
+autocmd ColorScheme * highlight VisualNOS ctermfg=224 ctermbg=61
+autocmd ColorScheme * highlight Visual ctermfg=224 ctermbg=61
+highlight Normal ctermbg=none
+colorscheme molokai
 
 "  .jsx 以外のファイルにもJSXを適用
 let g:jsx_ext_required = 0
@@ -260,6 +264,9 @@ nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearc
 " Highlight and replace under cursor
 nmap # <Space><Space>:%s/<C-r>///g<Left><Left>
 
+" grep under cursor (opening new tab)
+noremap <Space>g "zyiw:tabnew<CR>:vimgrep /<C-r>z/ **/* \| cwin<CR>
+
 nnoremap x "_x
 nnoremap s "_s
 " winresizer
@@ -285,3 +292,6 @@ augroup qf_win
   autocmd QuickfixCmdPost [^l]* copen
   autocmd QuickfixCmdPost l* lopen
 augroup END
+
+" for ctrlp.vim
+set runtimepath^=~/.vim/bundle/ctrlp.vim
