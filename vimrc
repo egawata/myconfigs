@@ -235,21 +235,14 @@ let g:vim_markdown_new_list_item_indent = 4
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_lebel = 2
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=237
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=236
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=237 ctermfg=59
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=236 ctermfg=59
 
 "  Nerd tree
 command! Nt NERDTreeToggle
 
 "  remove trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//ge
-
-"  grep 後に quickfix を開く
-augroup qf_win
-  autocmd!
-  autocmd QuickfixCmdPost [^l]* copen
-  autocmd QuickfixCmdPost l* lopen
-augroup END
 
 command! OpenModuleUnderCursor call s:OpenModuleUnderCursor()
 function! s:OpenModuleUnderCursor()
@@ -266,6 +259,7 @@ nmap # <Space><Space>:%s/<C-r>///g<Left><Left>
 
 " grep under cursor (opening new tab)
 noremap <Space>g "zyiw:tabnew<CR>:vimgrep /<C-r>z/ **/* \| cwin<CR>
+noremap <Space>G "zyiw:tabnew<CR>:e ggrep_dummy<CR>:Ggrep <C-r>z \| cwin<CR>
 
 nnoremap x "_x
 nnoremap s "_s
