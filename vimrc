@@ -25,6 +25,7 @@ set foldnestmax=2
 set ignorecase
 set smartcase
 set backspace=indent,eol,start
+set wildignorecase
 filetype plugin on
 
 set ttyfast
