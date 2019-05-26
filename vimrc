@@ -248,7 +248,14 @@ autocmd BufWritePre * :%s/\s\+$//ge
 command! OpenModuleUnderCursor call s:OpenModuleUnderCursor()
 function! s:OpenModuleUnderCursor()
     silent normal "zyiw
-    let a:filePath = 'lib/' . substitute(@z, '::', '/', 'g') . '.pm'
+    let a:moduleName = @z
+    let a:filePath = 'lib/' . substitute(a:moduleName, '::', '/', 'g') . '.pm'
+    if !filereadable(a:filePath)
+        let a:modulePath = substitute(system('carton exec perldoc -l '. a:moduleName), "\n", "", "")
+        if filereadable(a:modulePath)
+            let a:filePath = a:modulePath
+        endif
+    endif
     exe 'tabe ' . a:filePath
 endfunction
 autocmd FileType perl nmap <F7> :OpenModuleUnderCursor<CR>
