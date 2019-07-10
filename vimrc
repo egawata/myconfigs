@@ -117,6 +117,7 @@ endfunction
 
 autocmd FileType perl nmap <F8> :Perl<CR>
 autocmd FileType python nmap <F8> :Python<CR>
+autocmd FileType go nmap <F8> :GoRun %<CR>
 
 
 function! s:pm_template()
@@ -297,3 +298,5 @@ augroup END
 
 " for ctrlp.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+command! Drecache call dein#recache_runtimepath()
