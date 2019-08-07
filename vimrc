@@ -132,7 +132,7 @@ function! s:pm_template()
     call append(4, '')
     call append(5, '')
     call append(6, '')
-    call append(7, '1;')
+    call setline(line("$"), '1;')
     call cursor(6, 0)
     " echomsg path
 endfunction
