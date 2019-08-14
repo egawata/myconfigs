@@ -193,6 +193,13 @@ if dein#load_state('/home/egawata/.vim/dein')
 
   call dein#add('simeji/winresizer')
 
+  call dein#add('Shougo/unite.vim')
+  call dein#add('vim-perl/vim-perl')
+  call dein#add('kshenoy/vim-signature')
+  call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+					\ 'build': 'cd app & yarn install' })
+  call dein#add('banaoh/changed.vim')
+
   " Required:
   call dein#end()
   call dein#save_state()
