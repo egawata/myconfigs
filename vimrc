@@ -199,6 +199,7 @@ if dein#load_state('/home/egawata/.vim/dein')
   call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
 					\ 'build': 'cd app & yarn install' })
   call dein#add('banaoh/changed.vim')
+  call dein#add('AndrewRadev/linediff.vim') " 2箇所のテキストの差分を表示
 
   " Required:
   call dein#end()
@@ -307,3 +308,4 @@ augroup END
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 command! Drecache call dein#recache_runtimepath()
+set clipboard=unnamed
