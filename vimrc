@@ -200,6 +200,21 @@ if dein#load_state('/home/egawata/.vim/dein')
 					\ 'build': 'cd app & yarn install' })
   call dein#add('banaoh/changed.vim')
   call dein#add('AndrewRadev/linediff.vim') " 2箇所のテキストの差分を表示
+  call dein#add('itchyny/lightline.vim')    " status line
+
+  "  deoplete
+  call dein#add('Shougo/deoplete.nvim')
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+  let g:deoplete#enable_at_startup = 1
+  let g:go_def_mapping_enabled = 0
+  let g:go_doc_keywordprg_enabled = 0
+
+  let s:toml_dir = expand("~/.config/nvim")
+  call dein#load_toml(s:toml_dir . '/dein.toml', {'lazy': 0})
+  call dein#load_toml(s:toml_dir . '/dein_lazy.toml', {'lazy': 1})
 
   " Required:
   call dein#end()
@@ -309,3 +324,9 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 command! Drecache call dein#recache_runtimepath()
 set clipboard=unnamed
+
+" lightline config
+let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \ }
+

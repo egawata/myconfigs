@@ -1,0 +1,7 @@
+[[plugins]]
+repo = 'deoplete-plugins/deoplete-go'
+on_ft = 'go'
+
+[[plugins]]
+repo = 'c9s/perlomni.vim'
+on_ft = 'perl'
