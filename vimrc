@@ -328,5 +328,28 @@ set clipboard=unnamed
 " lightline config
 let g:lightline = {
     \ 'colorscheme': 'wombat',
+    \ 'component_function': {
+    \   'filename': 'LightlineFilename',
+    \ }
     \ }
 
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+
+" git ブランチ分岐元との diff
+function! s:gdiffm()
+    let orig = getcwd()
+    lcd %:h
+    let commit = system('git show-branch --merge-base master HEAD')
+    echomsg "commit = " . commit
+    exec "Gdiffsplit " . commit
+    execute "lcd " . orig
+endfunction
+
+command! Gdiffm call s:gdiffm()
