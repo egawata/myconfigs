@@ -67,6 +67,8 @@ inoremap <C-f> <Right>
 map <F9> :tabnew<CR>
 map <F10> :tabprev<CR>
 map <F11> :tabnext<CR>
+" タグジャンプ時に別tabを開く
+nnoremap <F3> :<C-u>tab stj <C-R>=expand('<cword>')<CR><CR>
 
 "
 "  Change status line color in insert mode
