@@ -152,16 +152,18 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-" Required:
-set runtimepath+=/home/egawata/.vim/dein/repos/github.com/Shougo/dein.vim
+let s:deinroot = $HOME . "/.vim/dein"
 
 " Required:
-if dein#load_state('/home/egawata/.vim/dein')
-  call dein#begin('/home/egawata/.vim/dein')
+execute("set runtimepath+=" . s:deinroot . "/repos/github.com/Shougo/dein.vim")
+
+" Required:
+if dein#load_state(s:deinroot)
+  call dein#begin(s:deinroot)
 
   " Let dein manage dein
   " Required:
-  call dein#add('/home/egawata/.vim/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add(s:deinroot . '/repos/github.com/Shougo/dein.vim')
 
   call dein#add('Shougo/dein.vim')
   call dein#add('Shougo/neocomplete.vim')
@@ -269,20 +271,20 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=236 ctermfg=59
 command! Nt NERDTreeToggle
 
 "  remove trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//ge
+" autocmd BufWritePre * :%s/\s\+$//ge
 
 command! OpenModuleUnderCursor call s:OpenModuleUnderCursor()
 function! s:OpenModuleUnderCursor()
     silent normal "zyiw
-    let a:moduleName = @z
-    let a:filePath = 'lib/' . substitute(a:moduleName, '::', '/', 'g') . '.pm'
-    if !filereadable(a:filePath)
-        let a:modulePath = substitute(system('carton exec perldoc -l '. a:moduleName), "\n", "", "")
-        if filereadable(a:modulePath)
-            let a:filePath = a:modulePath
+    let l:moduleName = @z
+    let l:filePath = 'lib/' . substitute(l:moduleName, '::', '/', 'g') . '.pm'
+    if !filereadable(l:filePath)
+        let l:modulePath = substitute(system('carton exec perldoc -l '. l:moduleName), "\n", "", "")
+        if filereadable(l:modulePath)
+            let l:filePath = l:modulePath
         endif
     endif
-    exe 'tabe ' . a:filePath
+    exe 'tabe ' . l:filePath
 endfunction
 autocmd FileType perl nmap <F7> :OpenModuleUnderCursor<CR>
 
@@ -311,8 +313,8 @@ inoremap { {}<Left>
 inoremap {<Enter> {}<Left><CR><ESC><S-o>
 inoremap ( ()<ESC>i
 inoremap (<Enter> ()<Left><CR><ESC><S-o>
-inoremap ' ''<LEFT>
-inoremap " ""<LEFT>
+"inoremap ' ''<LEFT>
+"inoremap " ""<LEFT>
 
 "  grep 後に quickfix を開く
 augroup qf_win
