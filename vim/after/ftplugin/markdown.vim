@@ -5,19 +5,25 @@ setlocal expandtab
 
 function! s:addIndentByTab()
   let l = getline(".")
-  if match(l, "^ \*-$") > -1
-    call setline(".", "    " . l . " ")
+  if match(l, '^\(    \)*-$') > -1
+    call setline(".", '    ' . l . ' ')
+    startinsert!
+  elseif match(l, '^\(    \)*- $') > -1
+    call setline(".", '    ' . l)
+    startinsert!
   else
-    call setline(".", l . "    ")
+    execute('normal a    ')
+    let curr = getcurpos()
+    call cursor(curr[1], curr[2] + 1)
+    startinsert
   endif
-  startinsert!
 endfunction
 
 function! s:removeIndentByTab()
   let l = getline(".")
-  call setline(".", substitute(l, "^    ", "", ""))
-  if match(l, "^ \*-$") > -1
-    call setline(".", getline(".") . " ")
+  call setline(".", substitute(l, '^    ', '', ''))
+  if match(l, '^\(    \)*-$') > -1
+    call setline(".", getline(".") . ' ')
   endif
   startinsert!
 endfunction
