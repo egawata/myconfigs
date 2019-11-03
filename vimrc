@@ -51,6 +51,7 @@ iab test_mysqld <esc>:r ~/.code_templates/test_mysqld.pl<return><esc>
 au BufNewFile,BufRead *.t set filetype=perl
 au BufNewFile,BufRead *.psgi set filetype=perl
 au BufNewFile,BufRead *.tt set filetype=html
+au BufNewFile,BufRead *.tsx set filetype=typescript
 
 hi DiffAdd    ctermfg=black ctermbg=2
 hi DiffChange ctermfg=black ctermbg=3
@@ -358,3 +359,32 @@ function! s:gdiffm()
 endfunction
 
 command! Gdiffm call s:gdiffm()
+
+" Markdown indent
+function! s:addIndentByTab()
+  let l = getline(".")
+  if match(l, '^\(    \)*-$') > -1
+    call setline(".", '    ' . l . ' ')
+    startinsert!
+  elseif match(l, '^\(    \)*- $') > -1
+    call setline(".", '    ' . l)
+    startinsert!
+  else
+    execute('normal a    ')
+    let curr = getcurpos()
+    call cursor(curr[1], curr[2] + 1)
+    startinsert
+  endif
+endfunction
+
+function! s:removeIndentByTab()
+  let l = getline(".")
+  call setline(".", substitute(l, '^    ', '', ''))
+  if match(l, '^\(    \)*-$') > -1
+    call setline(".", getline(".") . ' ')
+  endif
+  startinsert!
+endfunction
+
+autocmd BufNewFile,BufRead *.md inoremap <silent> <Tab> <Esc>:call <SID>addIndentByTab()<CR>
+autocmd BufNewFile,BufRead *.md inoremap <silent> <S-Tab> <Esc>:call <SID>removeIndentByTab()<CR>
