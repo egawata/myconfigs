@@ -65,9 +65,9 @@ set list
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 
-map <F9> :tabnew<CR>
-map <F10> :tabprev<CR>
-map <F11> :tabnext<CR>
+noremap <F9> <esc>:tabnew<CR>
+noremap <F10> <esc>:tabprev<CR>
+noremap <F11> <esc>:tabnext<CR>
 " タグジャンプ時に別tabを開く
 nnoremap <F3> :<C-u>tab stj <C-R>=expand('<cword>')<CR><CR>
 
@@ -205,7 +205,6 @@ if dein#load_state(s:deinroot)
 					\ 'build': 'cd app & yarn install' })
   call dein#add('banaoh/changed.vim')
   call dein#add('AndrewRadev/linediff.vim') " 2箇所のテキストの差分を表示
-  call dein#add('itchyny/lightline.vim')    " status line
 
   "  deoplete
   call dein#add('Shougo/deoplete.nvim')
