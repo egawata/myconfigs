@@ -4,6 +4,10 @@ repo = 'itchyny/lightline.vim'
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'
+# Space + s で、カーソル下にある文字を検索、もしくは URL を開く
+hook_add = '''
+nmap <Space>s <Plug>(openbrowser-smart-search)
+'''
 
 [[plugins]]
 repo = 'tyru/open-browser-github.vim'
