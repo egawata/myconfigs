@@ -399,5 +399,8 @@ function! s:showShellCmdResultWithNewWin()
     exec ":r!" . comm
     call append(line('$'), '~~~')
     call cursor(1, 1)
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    setlocal noswapfile
 endfunction
 vnoremap <S-R> y:silent call <SID>showShellCmdResultWithNewWin()<CR>
