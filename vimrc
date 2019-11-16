@@ -404,20 +404,3 @@ endfunction
 
 autocmd BufNewFile,BufRead *.md inoremap <silent> <Tab> <Esc>:call <SID>addIndentByTab()<CR>
 autocmd BufNewFile,BufRead *.md inoremap <silent> <S-Tab> <Esc>:call <SID>removeIndentByTab()<CR>
-
-" Shift-R で、選択範囲のコマンドを実行して別ウィンドウで出力結果を表示する
-function! s:showShellCmdResultWithNewWin()
-    let comm = trim(@*)
-    exec 'new'
-    call append(0, '> ' . comm)
-    call append(1, '')
-    call append(2, '~~~')
-    normal! dd
-    exec ":r!" . comm
-    call append(line('$'), '~~~')
-    call cursor(1, 1)
-    setlocal buftype=nofile
-    setlocal bufhidden=hide
-    setlocal noswapfile
-endfunction
-vnoremap <S-R> y:silent call <SID>showShellCmdResultWithNewWin()<CR>

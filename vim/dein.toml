@@ -11,3 +11,9 @@ nmap <Space>s <Plug>(openbrowser-smart-search)
 
 [[plugins]]
 repo = 'tyru/open-browser-github.vim'
+
+[[plugins]]
+repo = 'egawata/sh-cmd-runner'
+hook_add = '''
+let g:sh_cmd_runner_cmd_prefix = '$ '
+'''
