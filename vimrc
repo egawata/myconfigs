@@ -144,93 +144,108 @@ autocmd BufNewFile *.pm call s:pm_template()
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
+" 通常の Plugin を読み込むときは s:vimrc_plugin_on = s:true にする
+" s:false にすると、通常Pluginは読み込まれず、開発中のPluginのみが読み込まれる
+" Plugin開発中は、Pluginのrootに .development.vim というファイルを設置する
+let s:true = 1
+let s:false = 0
+let s:vimrc_plugin_on = get(g:, 'vimrc_plugin_on', s:true)
+if len(findfile("./.development.vim", ".;")) > 0
+  let s:vimrc_plugin_on = s:false
+  set runtimepath&
+  execute 'set runtimepath+=' . getcwd()
+  for plug in split(glob(getcwd() . '/*'), '\n')
+    execute 'set runtimepath+=' . plug
+  endfor
+endif
 
 "
 "  dein.vim
 "
-
-if &compatible
-  set nocompatible               " Be iMproved
-endif
-
-let s:deinroot = $HOME . "/.vim/dein"
-
-" Required:
-execute("set runtimepath+=" . s:deinroot . "/repos/github.com/Shougo/dein.vim")
-
-" Required:
-if dein#load_state(s:deinroot)
-  call dein#begin(s:deinroot)
-
-  " Let dein manage dein
-  " Required:
-  call dein#add(s:deinroot . '/repos/github.com/Shougo/dein.vim')
-
-  call dein#add('Shougo/dein.vim')
-  call dein#add('Shougo/neocomplete.vim')
-  call dein#add('fatih/vim-go')
-  call dein#add('ctrlpvim/ctrlp.vim')
-  call dein#add('mileszs/ack.vim')
-  call dein#add('jbgutierrez/vim-babel')
-  call dein#add('kchmck/vim-coffee-script')
-  call dein#add('leafgarland/typescript-vim')
-  " ES6対応
-  call dein#add('othree/yajs.vim')
-  " ES7対応
-  call dein#add('othree/es.next.syntax.vim')
-  " JSX
-  call dein#add('mxw/vim-jsx')
-
-  call dein#add('mattn/webapi-vim')
-  call dein#add('mattn/gist-vim')
-
-  call dein#add('chase/vim-ansible-yaml')
-
-  call dein#add('rcmdnk/vim-markdown')
-  call dein#add('Shougo/unite.vim')
-  call dein#add('tomasr/molokai')
-  call dein#add('nathanaelkane/vim-indent-guides')
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('tomtom/tcomment_vim')
-  call dein#add('tpope/vim-fugitive')
-
-  call dein#add('simeji/winresizer')
-
-  call dein#add('Shougo/unite.vim')
-  call dein#add('vim-perl/vim-perl')
-  call dein#add('kshenoy/vim-signature')
-  call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
-					\ 'build': 'cd app & yarn install' })
-  call dein#add('banaoh/changed.vim')
-  call dein#add('AndrewRadev/linediff.vim') " 2箇所のテキストの差分を表示
-
-  "  deoplete
-  call dein#add('Shougo/deoplete.nvim')
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
+if s:vimrc_plugin_on == s:true
+  if &compatible
+    set nocompatible               " Be iMproved
   endif
-  let g:deoplete#enable_at_startup = 1
-  let g:go_def_mapping_enabled = 0
-  let g:go_doc_keywordprg_enabled = 0
 
-  let s:toml_dir = expand("~/.config/nvim")
-  call dein#load_toml(s:toml_dir . '/dein.toml', {'lazy': 0})
-  call dein#load_toml(s:toml_dir . '/dein_lazy.toml', {'lazy': 1})
+  let s:deinroot = $HOME . "/.vim/dein"
 
   " Required:
-  call dein#end()
-  call dein#save_state()
-endif
+  execute("set runtimepath+=" . s:deinroot . "/repos/github.com/Shougo/dein.vim")
 
-" Required:
-filetype plugin indent on
-syntax enable
+  " Required:
+  if dein#load_state(s:deinroot)
+    call dein#begin(s:deinroot)
 
-if dein#check_install()
-  call dein#install()
+    " Let dein manage dein
+    " Required:
+    call dein#add(s:deinroot . '/repos/github.com/Shougo/dein.vim')
+
+    call dein#add('Shougo/dein.vim')
+    call dein#add('Shougo/neocomplete.vim')
+    call dein#add('fatih/vim-go')
+    call dein#add('ctrlpvim/ctrlp.vim')
+    call dein#add('mileszs/ack.vim')
+    call dein#add('jbgutierrez/vim-babel')
+    call dein#add('kchmck/vim-coffee-script')
+    call dein#add('leafgarland/typescript-vim')
+    " ES6対応
+    call dein#add('othree/yajs.vim')
+    " ES7対応
+    call dein#add('othree/es.next.syntax.vim')
+    " JSX
+    call dein#add('mxw/vim-jsx')
+
+    call dein#add('mattn/webapi-vim')
+    call dein#add('mattn/gist-vim')
+
+    call dein#add('chase/vim-ansible-yaml')
+
+    call dein#add('rcmdnk/vim-markdown')
+    call dein#add('Shougo/unite.vim')
+    call dein#add('tomasr/molokai')
+    call dein#add('nathanaelkane/vim-indent-guides')
+    call dein#add('scrooloose/nerdtree')
+    call dein#add('Shougo/neosnippet.vim')
+    call dein#add('Shougo/neosnippet-snippets')
+    call dein#add('tomtom/tcomment_vim')
+    call dein#add('tpope/vim-fugitive')
+
+    call dein#add('simeji/winresizer')
+
+    call dein#add('Shougo/unite.vim')
+    call dein#add('vim-perl/vim-perl')
+    call dein#add('kshenoy/vim-signature')
+    call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+            \ 'build': 'cd app & yarn install' })
+    call dein#add('banaoh/changed.vim')
+    call dein#add('AndrewRadev/linediff.vim') " 2箇所のテキストの差分を表示
+
+    "  deoplete
+    call dein#add('Shougo/deoplete.nvim')
+    if !has('nvim')
+      call dein#add('roxma/nvim-yarp')
+      call dein#add('roxma/vim-hug-neovim-rpc')
+    endif
+    let g:deoplete#enable_at_startup = 1
+    let g:go_def_mapping_enabled = 0
+    let g:go_doc_keywordprg_enabled = 0
+
+    let s:toml_dir = expand("~/.config/nvim")
+    call dein#load_toml(s:toml_dir . '/dein.toml', {'lazy': 0})
+    call dein#load_toml(s:toml_dir . '/dein_lazy.toml', {'lazy': 1})
+
+    " Required:
+    call dein#end()
+    call dein#save_state()
+  endif
+
+  " Required:
+  filetype plugin indent on
+  syntax enable
+
+  if dein#check_install()
+    call dein#install()
+  endif
 endif
 
 "
@@ -242,7 +257,9 @@ set t_Co=256
 autocmd ColorScheme * highlight VisualNOS ctermfg=224 ctermbg=61
 autocmd ColorScheme * highlight Visual ctermfg=224 ctermbg=61
 highlight Normal ctermbg=none
-colorscheme molokai
+if s:vimrc_plugin_on == s:true
+  colorscheme molokai
+endif
 
 "  .jsx 以外のファイルにもJSXを適用
 let g:jsx_ext_required = 0
