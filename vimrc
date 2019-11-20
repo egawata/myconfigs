@@ -425,3 +425,7 @@ autocmd BufNewFile,BufRead *.md inoremap <silent> <S-Tab> <Esc>:call <SID>remove
 
 " perl で、カーソル下モジュールの perldoc を表示する
 autocmd Filetype perl nnoremap <Space>p :OpenPerldocUnderCursor<CR>
+
+if filereadable($HOME . '/.vimrc.include')
+  exe 'source ' . $HOME . '/.vimrc.include'
+endif
