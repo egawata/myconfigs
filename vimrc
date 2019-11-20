@@ -303,6 +303,24 @@ function! s:OpenModuleUnderCursor()
     endif
     exe 'tabe ' . l:filePath
 endfunction
+
+command! OpenPerldocUnderCursor call s:OpenPerldocUnderCursor()
+function! s:OpenPerldocUnderCursor()
+    silent normal "zyiw
+    let l:moduleName = @z
+    let l:filePath = 'lib/' . substitute(l:moduleName, '::', '/', 'g') . '.pm'
+    exe 'new'
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    setlocal noswapfile
+    if filereadable(l:filePath)
+      exe 'r!perldoc ' . l:filePath
+    else
+      exe 'r!carton exec perldoc ' . l:moduleName
+    endif
+    exe ':normal gg'
+endfunction
+
 autocmd FileType perl nmap <F7> :OpenModuleUnderCursor<CR>
 
 nnoremap <silent> <Space><Space> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
@@ -404,3 +422,6 @@ endfunction
 
 autocmd BufNewFile,BufRead *.md inoremap <silent> <Tab> <Esc>:call <SID>addIndentByTab()<CR>
 autocmd BufNewFile,BufRead *.md inoremap <silent> <S-Tab> <Esc>:call <SID>removeIndentByTab()<CR>
+
+" perl で、カーソル下モジュールの perldoc を表示する
+autocmd Filetype perl nnoremap <Space>p :OpenPerldocUnderCursor<CR>
