@@ -420,8 +420,8 @@ function! s:removeIndentByTab()
   startinsert!
 endfunction
 
-autocmd BufNewFile,BufRead *.md inoremap <silent> <Tab> <Esc>:call <SID>addIndentByTab()<CR>
-autocmd BufNewFile,BufRead *.md inoremap <silent> <S-Tab> <Esc>:call <SID>removeIndentByTab()<CR>
+autocmd BufNewFile,BufRead *.md,*.markdown inoremap <silent> <Tab> <Esc>:call <SID>addIndentByTab()<CR>
+autocmd BufNewFile,BufRead *.md,*markdown inoremap <silent> <S-Tab> <Esc>:call <SID>removeIndentByTab()<CR>
 
 " perl で、カーソル下モジュールの perldoc を表示する
 autocmd Filetype perl nnoremap <Space>p :OpenPerldocUnderCursor<CR>
