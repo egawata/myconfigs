@@ -5,3 +5,18 @@ on_ft = 'go'
 [[plugins]]
 repo = 'c9s/perlomni.vim'
 on_ft = 'perl'
+
+[[plugins]]
+repo = 'rcmdnk/vim-markdown'
+on_ft = 'markdown'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+on_ft = 'go'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+on_ft = 'go'
+hook_add = '''
+let g:lsp_settings_servers_dir = "~/.lsp_server"
+'''

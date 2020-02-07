@@ -20,3 +20,24 @@ let g:sh_cmd_runner_cmd_prefix = '$ '
 
 [[plugins]]
 repo = 'glidenote/memolist.vim'
+
+# vim-lsp + 非同期入力補完
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+
+# カッコ補完 foo -> (foo)
+[[plugins]]
+repo = 'machakann/vim-sandwich'
+
+# Esc 押下後自動的に英数モードに切り替え
+[[plugins]]
+repo = 'brglng/vim-im-select'
+hook_add = '''
+    let g:im_select_default = 'com.google.inputmethod.Japanese.Roman'
+'''

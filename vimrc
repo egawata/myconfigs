@@ -429,3 +429,18 @@ autocmd Filetype perl nnoremap <Space>p :OpenPerldocUnderCursor<CR>
 if filereadable($HOME . '/.vimrc.include')
   exe 'source ' . $HOME . '/.vimrc.include'
 endif
+
+" go lsp 用の設定
+if executable('golsp')
+  augroup LspGo
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'go-lang',
+        \ 'cmd': {server_info->['golsp', '-mode', 'stdio']},
+        \ 'whitelist': ['go'],
+        \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
+  augroup END
+endif
+
+let g:go_guru_scope = ["github.com/fout/rfp_go/..."]
