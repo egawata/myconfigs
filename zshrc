@@ -136,3 +136,23 @@ alias currbr='git rev-parse --abbrev-ref @'
 
 [ -f ~/.zshrc.plenv ] && source ~/.zshrc.plenv
 
+function cg() {
+    local pat=$1
+
+    local repo_list=`ghq list --full-path | grep "$pat"`
+
+    local num_cand=`echo -n $repo_list | grep -c '^'`
+    if [ $num_cand -eq 0 ]; then
+        echo "No repository found: $pat"
+        return
+    elif [ $num_cand -eq 1 ]; then
+        cd $repo_list
+        echo "Moved to $repo_list"
+    else
+        local selected=`echo $repo_list | fzf`
+        if [ $selected ]; then
+            cd $selected
+            echo "Moved to $selected"
+        fi
+    fi
+}
