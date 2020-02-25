@@ -136,10 +136,16 @@ alias currbr='git rev-parse --abbrev-ref @'
 
 [ -f ~/.zshrc.plenv ] && source ~/.zshrc.plenv
 
+# cg (repo name pattern) で ghq 管理下のリポジトリのディレクトリに移動
 function cg() {
+    local opt=
+    if [ $1 = "-e" ]; then
+        shift
+        opt=-e
+    fi
     local pat=$1
 
-    local repo_list=`ghq list --full-path | grep "$pat"`
+    local repo_list=`ghq list $opt --full-path $pat`
 
     local num_cand=`echo -n $repo_list | grep -c '^'`
     if [ $num_cand -eq 0 ]; then
