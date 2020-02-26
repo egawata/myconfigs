@@ -140,15 +140,18 @@ alias currbr='git rev-parse --abbrev-ref @'
 function cg() {
     local opts=()
     local pat=
+    local e_i='-i'
     for arg in $@; do
-        if [[ $arg =~ ^- ]]; then
+        if [[ $arg = '-e' ]]; then
+            e_i='-e'
+        elif [[ $arg =~ ^- ]]; then
             opts=($opts $arg)
         else
             pat=$arg
         fi
     done
 
-    local repo_list=`ghq list ${opts} --full-path ${pat}`
+    local repo_list=`ghq list ${opts} ${e_i} --full-path ${pat}`
 
     local num_cand=`echo -n $repo_list | grep -c '^'`
     if [ $num_cand -eq 0 ]; then
