@@ -97,6 +97,9 @@ PROMPT2="%{${fg[green]}%}%_> %{${reset_color}%}"
 SPROMPT="%{${fg[red]}%}correct: %R -> %r [nyae]? %{${reset_color}%}"
 RPROMPT="%{${fg[green]}%}[%~]%{${reset_color}%}"
 
+alias mv='mv -i'
+alias cp='cp -i'
+alias rm='rm -i'
 
 alias vi=vim
 
@@ -117,12 +120,22 @@ export LANG=ja_JP.UTF-8
 
 [ -f ~/.zshrc.include ] && source ~/.zshrc.include
 
+alias currbr='git rev-parse --abbrev-ref @'
+alias cu='git rev-parse --abbrev-ref @'
+
+__git_ps1_fast() {
+    if [ -d $PWD/.git ]; then
+        echo $(cu)
+    fi
+}
+
 if [ -f ~/.zsh/git-prompt.sh ]; then
     source ~/.zsh/git-prompt.sh
     setopt PROMPT_SUBST
     setopt TRANSIENT_RPROMPT
     precmd() {
-        PROMPT="%{${fg[green]}%}[%n@%m:$(__git_ps1 "%s")] %(!.#.$) %{${reset_color}%}"
+        #PROMPT="%{${fg[green]}%}[%n@%m:$(__git_ps1 "%s")] %(!.#.$) %{${reset_color}%}"
+        PROMPT="%{${fg[green]}%}[%n@%m:$(__git_ps1_fast)] %(!.#.$) %{${reset_color}%}"
     }
     GIT_PS1_SHOWDIRTYSTATE=1
     GIT_PS1_SHOWSTASHSTATE=1
@@ -132,7 +145,6 @@ if [ -f ~/.zsh/git-prompt.sh ]; then
     GIT_PS1_SHOWCOLORHINTS=1
 fi
 
-alias currbr='git rev-parse --abbrev-ref @'
 
 [ -f ~/.zshrc.plenv ] && source ~/.zshrc.plenv
 
