@@ -41,3 +41,7 @@ repo = 'brglng/vim-im-select'
 hook_add = '''
     let g:im_select_default = 'com.google.inputmethod.Japanese.Roman'
 '''
+
+# <leader>j でカーソル下単語の定義を探す
+[[plugins]]
+repo = 'pechorin/any-jump.vim'

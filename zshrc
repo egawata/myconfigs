@@ -120,8 +120,10 @@ export LANG=ja_JP.UTF-8
 
 [ -f ~/.zshrc.include ] && source ~/.zshrc.include
 
-alias currbr='git rev-parse --abbrev-ref @'
-alias cu='git rev-parse --abbrev-ref @'
+#alias currbr='git rev-parse --abbrev-ref @'
+#alias cu='git rev-parse --abbrev-ref @'
+alias currbr="git branch --show-current"
+alias cu="git branch --show-current"
 
 __git_ps1_fast() {
     if [ -d $PWD/.git ]; then
@@ -145,6 +147,14 @@ if [ -f ~/.zsh/git-prompt.sh ]; then
     GIT_PS1_SHOWCOLORHINTS=1
 fi
 
+[ -f ~/.zshrc.plenv ] && source ~/.zshrc.plenv
+#alias perl=$HOME/localperl/bin/perl5.31.10
+#export PATH=$PATH:$HOME/localperl/bin
+
+export EDITOR=vim
+
+fpath=(~/.zsh/completions $fpath)
+autoload -U compinit && compinit -C
 
 [ -f ~/.zshrc.plenv ] && source ~/.zshrc.plenv
 
