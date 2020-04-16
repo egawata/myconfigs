@@ -444,3 +444,11 @@ if executable('golsp')
 endif
 
 let g:go_guru_scope = ["github.com/fout/rfp_go/..."]
+
+" カーソル下のファイルを開く
+" gf, gF で新しいタブで開く。<C-w> をつけると同じタブで開く
+" また gf と gF を逆にする
+nnoremap gf  <c-w>gF
+nnoremap gF  <c-w>gf
+nnoremap <c-w>gf gF
+nnoremap <c-w>gF gf
