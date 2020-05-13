@@ -15,7 +15,9 @@ repo = 'tyru/open-browser-github.vim'
 [[plugins]]
 repo = 'egawata/sh-cmd-runner'
 hook_add = '''
+let g:sh_cmd_runner_run_cmd_key = '<S-r>'
 let g:sh_cmd_runner_cmd_prefix = '$ '
+let g:sh_cmd_runner_result_separator = '~~~'
 '''
 
 [[plugins]]
@@ -40,6 +42,20 @@ repo = 'machakann/vim-sandwich'
 repo = 'brglng/vim-im-select'
 hook_add = '''
     let g:im_select_default = 'com.google.inputmethod.Japanese.Roman'
+'''
+
+# gctags
+# f 今のファイルの関数などの一覧
+# j カーソル下の単語が含まれるタグの表示
+# d カーソル下の単語の参照元を表示
+# c カーソル下の単語の参照先を表示
+[[plugins]]
+repo = 'lighttiger2505/gtags.vim'
+hook_add = '''
+nnoremap <silent> <Space>f :Gtags -f %<CR>
+nnoremap <silent> <Space>j :GtagsCursor<CR>
+nnoremap <silent> <Space>d :<C-u>exe('Gtags '.expand('<cword>'))<CR>
+nnoremap <silent> <Space>c :<C-u>exe('Gtags -r '.expand('<cword>'))<CR>
 '''
 
 # <leader>j でカーソル下単語の定義を探す

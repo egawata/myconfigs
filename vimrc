@@ -36,6 +36,8 @@ set splitright
 
 highlight Normal ctermbg=none
 
+let mapleader = ','
+
 augroup vimrc-auto-cursorline
     autocmd!
     autocmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
@@ -69,6 +71,11 @@ noremap <F9> <esc>:tabnew<CR>
 noremap <F10> <esc>:tabprev<CR>
 noremap <F11> <esc>:tabnext<CR>
 " タグジャンプ時に別tabを開く
+" tab {cmd} : cmd を実行する。もし cmd が新しいwindowを開くような動作であれば、代わりに tab を開く。
+" ts[elect] {name}: name に合致するタグを検索して表示する
+" tj[ump] {name} : tselect と同じだが、match するものが1つしかなければlistを表示せず直接jumpする
+" stj[ump] {name} : tjump と同じ。split して新しい jump 先をそこに表示
+" <cword> カーソル下にある文字列を表す
 nnoremap <F3> :<C-u>tab stj <C-R>=expand('<cword>')<CR><CR>
 
 "
@@ -452,3 +459,6 @@ nnoremap gf  <c-w>gF
 nnoremap gF  <c-w>gf
 nnoremap <c-w>gf gF
 nnoremap <c-w>gF gf
+
+" 現在より右側のタブをすべて終了する
+command -nargs=0 Tabcr :.+1,$tabdo :q
