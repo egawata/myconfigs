@@ -20,6 +20,7 @@
     h = help
     sb = show-branch
     dc = diff --cached
+	pushf = push --force-with-lease
 [color]
 	diff = auto
 	status = auto
