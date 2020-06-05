@@ -64,6 +64,8 @@ hi Search     ctermfg=blue  ctermbg=yellow
 set listchars=tab:>-
 set list
 
+set iskeyword+=-
+
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 
