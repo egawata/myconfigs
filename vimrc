@@ -464,6 +464,3 @@ nnoremap <c-w>gF gf
 
 " 現在より右側のタブをすべて終了する
 command -nargs=0 Tabcr :.+1,$tabdo :q
-
-" leader を変更する
-let mapleader = ","
