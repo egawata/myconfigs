@@ -1,9 +1,14 @@
-set tabstop=4
-set expandtab
 set incsearch
 set smarttab
+
+" tabstop: 何文字のスペースをタブ文字とみなすか
+" softtabstop: tab キーを押したときにいくつのスペースを入れるか
+" shiftwidth: 自動インデント時にどれだけ文字をずらすか(<<, >> など)
+set expandtab
+set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+
 set scrolloff=5
 set showmatch
 set statusline=%F%m%r%h\ %y%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%=%c:%l/%L
@@ -31,36 +36,69 @@ filetype plugin on
 set ttyfast
 set lazyredraw
 
+" split, vsplit 時に新しいウィンドウを現在のウィンドウの下 or 右側に作る
 set splitbelow
 set splitright
 
+" ハイライトグループ `Normal` の設定
+" 背景色は設定無し(none)にする
 highlight Normal ctermbg=none
 
 let mapleader = ','
 
+" autocommand group を定義し、そのグループ限定の設定を記述する。
+" augroup END までの間がグループ限定の設定
+" グループ名は、スペース以外の文字は何でも使える
+" - autocmd とは？
+"   - 特定の操作を行ったときに自動的に実行されるコマンドを定義するためのもの
+"     - ファイルの読み書き
+"     - buffer, window に入った、もしくは離れたとき
+"     - vim を終了したとき
+" - augroup はなぜ必要？
+"   - .vimrc を再読み込みすると、設定が二重に行われるのを避けるため
+"     - 二重に設定されると遅くなる
+"   - 一旦 autocmd! で全消去しているので、前の同じ設定が消されてから定義される
 augroup vimrc-auto-cursorline
+    " autocmd を一旦全消去する
     autocmd!
+    " autocmd [GROUP] event file-pattern cmd
+    " cursorline は、現在カーソルのある行をハイライトする
+    " CursorMoved は、カーソルが移動したとき(I はインサートモードのとき)
+    " CursorHold は、キーが押されないまま一定時間が過ぎたとき
+    " WinLeave は、ウィンドウを離れるとき
     autocmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
     autocmd CursorHold,CursorHoldI * setlocal cursorline
 augroup END
 
+" TODO: 目的不明。消しても問題ないか検証
 autocmd FileType perl inoremap # X#
 
 iab pmod <esc>:r ~/.code_templates/perl_module.pl<return><esc>
 iab papp <esc>:r ~/.code_templates/perl_application.pl<return><esc>
 iab test_mysqld <esc>:r ~/.code_templates/test_mysqld.pl<return><esc>
 
-au BufNewFile,BufRead *.t set filetype=perl
-au BufNewFile,BufRead *.psgi set filetype=perl
-au BufNewFile,BufRead *.tt set filetype=html
-au BufNewFile,BufRead *.tsx set filetype=typescript
+augroup special-filetype
+  autocmd!
+  au BufNewFile,BufRead *.t set filetype=perl
+  au BufNewFile,BufRead *.psgi set filetype=perl
+  au BufNewFile,BufRead *.tt set filetype=html
+  au BufNewFile,BufRead *.tsx set filetype=typescript
+augroup END
 
-hi DiffAdd    ctermfg=black ctermbg=2
-hi DiffChange ctermfg=black ctermbg=3
-hi DiffDelete ctermfg=black ctermbg=6
-hi DiffText   ctermfg=black ctermbg=7
-hi Search     ctermfg=blue  ctermbg=yellow
+" highlight は、ハイライトグループごとの色を指定する
+" DiffXXX は、diff モードで使用されるもの
+" Search は、最後に検索された文字列
+highlight DiffAdd    ctermfg=black ctermbg=2
+highlight DiffChange ctermfg=black ctermbg=3
+highlight DiffDelete ctermfg=black ctermbg=6
+highlight DiffText   ctermfg=black ctermbg=7
+highlight Search     ctermfg=blue  ctermbg=yellow
 
+" list モード
+" - tab と行末を特別な表示方法にする
+" - listchars=tab:xy で、タブ文字が xyyy のように表示される
+" - listchars=eol:c で、行末に c と表示される
+" set list で実際に list モードに移行している
 set listchars=tab:>-
 set list
 
@@ -80,40 +118,6 @@ noremap <F11> <esc>:tabnext<CR>
 " <cword> カーソル下にある文字列を表す
 nnoremap <F3> :<C-u>tab stj <C-R>=expand('<cword>')<CR><CR>
 
-"
-"  Change status line color in insert mode
-"
-let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=black ctermbg=green cterm=none'
-
-if has('syntax')
-  augroup InsertHook
-    autocmd!
-    autocmd InsertEnter * call s:StatusLine('Enter')
-    autocmd InsertLeave * call s:StatusLine('Leave')
-  augroup END
-endif
-
-let s:slhlcm = ''
-function! s:StatusLine(mode)
-  if a:mode == 'Enter'
-    silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
-    silent exec g:hi_insert
-  else
-    highlight clear StatusLine
-    silent exec s:slhlcmd
-  endif
-endfunction
-
-function! s:GetHighlight(hi)
-  redir => hl
-  exec 'highlight '.a:hi
-  redir END
-  let hl = substitute(hl, '[\r\n]', '', 'g')
-  let hl = substitute(hl, 'xxx', '', '')
-  return hl
-endfunction
-
-
 "  Run editing source
 command! Perl call s:Perl()
 function! s:Perl()
@@ -127,10 +131,11 @@ function! s:Python()
   :!python3 %
 endfunction
 
-autocmd FileType perl nmap <F8> :Perl<CR>
-autocmd FileType python nmap <F8> :Python<CR>
-autocmd FileType go nmap <F8> :GoRun %<CR>
-
+augroup run-script
+    autocmd!
+    autocmd FileType perl nmap <F8> :Perl<CR>
+    autocmd FileType python nmap <F8> :Python<CR>
+augroup END
 
 function! s:pm_template()
     let path = substitute(expand('%'), '.*lib/', '', 'g')
@@ -146,12 +151,12 @@ function! s:pm_template()
     call append(6, '')
     call setline(line("$"), '1;')
     call cursor(6, 0)
-    " echomsg path
 endfunction
-autocmd BufNewFile *.pm call s:pm_template()
 
-
-let g:ackprg = 'ag --nogroup --nocolor --column'
+augroup perl_pm_template
+    autocmd!
+    autocmd BufNewFile *.pm call s:pm_template()
+augroup END
 
 " 通常の Plugin を読み込むときは s:vimrc_plugin_on = s:true にする
 " s:false にすると、通常Pluginは読み込まれず、開発中のPluginのみが読み込まれる
@@ -192,10 +197,11 @@ if s:vimrc_plugin_on == s:true
     call dein#add('Shougo/dein.vim')
     call dein#add('Shougo/neocomplete.vim')
     call dein#add('fatih/vim-go')
-    call dein#add('ctrlpvim/ctrlp.vim')
+
+    " grep の高速版
+    " :Ack {word} {directory}
     call dein#add('mileszs/ack.vim')
-    call dein#add('jbgutierrez/vim-babel')
-    call dein#add('kchmck/vim-coffee-script')
+
     call dein#add('leafgarland/typescript-vim')
     " ES6対応
     call dein#add('othree/yajs.vim')
@@ -207,15 +213,19 @@ if s:vimrc_plugin_on == s:true
     call dein#add('mattn/webapi-vim')
     call dein#add('mattn/gist-vim')
 
-    call dein#add('chase/vim-ansible-yaml')
-
     call dein#add('rcmdnk/vim-markdown')
-    call dein#add('Shougo/unite.vim')
     call dein#add('tomasr/molokai')
     call dein#add('nathanaelkane/vim-indent-guides')
     call dein#add('scrooloose/nerdtree')
+
+    "  deoplete
+    call dein#add('Shougo/deoplete.nvim')
+    let g:deoplete#enable_at_startup = 1
+
+    " C-k で定義済みのスニペットを貼り付ける
     call dein#add('Shougo/neosnippet.vim')
     call dein#add('Shougo/neosnippet-snippets')
+
     call dein#add('tomtom/tcomment_vim')
     call dein#add('tpope/vim-fugitive')
 
@@ -229,13 +239,10 @@ if s:vimrc_plugin_on == s:true
     call dein#add('banaoh/changed.vim')
     call dein#add('AndrewRadev/linediff.vim') " 2箇所のテキストの差分を表示
 
-    "  deoplete
-    call dein#add('Shougo/deoplete.nvim')
     if !has('nvim')
       call dein#add('roxma/nvim-yarp')
       call dein#add('roxma/vim-hug-neovim-rpc')
     endif
-    let g:deoplete#enable_at_startup = 1
     let g:go_def_mapping_enabled = 0
     let g:go_doc_keywordprg_enabled = 0
 
@@ -452,8 +459,6 @@ if executable('golsp')
   augroup END
 endif
 
-let g:go_guru_scope = ["github.com/fout/rfp_go/..."]
-
 " カーソル下のファイルを開く
 " gf, gF で新しいタブで開く。<C-w> をつけると同じタブで開く
 " また gf と gF を逆にする
@@ -463,4 +468,26 @@ nnoremap <c-w>gf gF
 nnoremap <c-w>gF gf
 
 " 現在より右側のタブをすべて終了する
-command -nargs=0 Tabcr :.+1,$tabdo :q
+command! -nargs=0 Tabcr :.+1,$tabdo :q
+
+" NeoSnippet
+" Plugin key-mappings.
+    " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+    " SuperTab like snippets behavior.
+    " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+    "imap <expr><TAB>
+    " \ pumvisible() ? "\<C-n>" :
+    " \ neosnippet#expandable_or_jumpable() ?
+    " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+    " For conceal markers.
+    if has('conceal')
+      set conceallevel=2 concealcursor=niv
+    endif
+" NeoSnippet end

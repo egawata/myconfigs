@@ -61,3 +61,11 @@ nnoremap <silent> <Space>c :<C-u>exe('Gtags -r '.expand('<cword>'))<CR>
 # <leader>j でカーソル下単語の定義を探す
 [[plugins]]
 repo = 'pechorin/any-jump.vim'
+
+# バッファを切り替える
+# C-p で起動、C-j, C-k で選択切り替え
+# 通常入力で検索語句を入力
+# C-f でそのバッファへ移動
+[[plugins]]
+repo = 'ctrlpvim/ctrlp.vim'
+
