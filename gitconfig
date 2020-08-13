@@ -12,6 +12,7 @@
     ca = commit --amend
     cmm = commit -m
     gr = grep --color
+    pullr = pull --rebase
     br = branch
     bra = branch -a
     au = update-index --assume-unchanged
@@ -26,10 +27,12 @@
 	status = auto
 	branch = auto
     grep = auto
+	ui = true
 [core]
 	excludesfile = /home/egawata/.gitignore
 	editor = vim -c \"set fenc=utf-8\"
 	pager = diff-so-fancy | less --tabs=4 -RFX
+	quotepath = false
 [github]
 	user = egawata
 [diff]
@@ -48,3 +51,5 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[pull]
+	ff = only
