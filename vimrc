@@ -302,6 +302,8 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=236 ctermfg=59
 
 "  Nerd tree
 command! Nt NERDTreeToggle
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 "  remove trailing whitespace
 " autocmd BufWritePre * :%s/\s\+$//ge
@@ -491,3 +493,5 @@ command! -nargs=0 Tabcr :.+1,$tabdo :q
       set conceallevel=2 concealcursor=niv
     endif
 " NeoSnippet end
+
+autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|RESOLVED:\)')
