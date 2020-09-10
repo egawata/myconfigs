@@ -23,6 +23,9 @@ let g:sh_cmd_runner_result_separator = '~~~'
 [[plugins]]
 repo = 'glidenote/memolist.vim'
 
+[[plugins]]
+repo = 'neovim/nvim-lsp'
+
 # vim-lsp + 非同期入力補完
 [[plugins]]
 repo = 'prabirshrestha/async.vim'
@@ -33,7 +36,26 @@ repo = 'prabirshrestha/asyncomplete.vim'
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
-# カッコ補完 foo -> (foo)
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+on_event = 'InsertEnter'
+hook_add = '''
+  let g:deoplete#enable_at_startup = 1
+'''
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+hook_add = '''
+  let g:lsp_settings_servers_dir = "~/.lsp_server"
+  nnoremap <C-]> :LspDefinition<CR>
+  nnoremap <C-w>] :sp<CR>:LspDefinition<CR>
+  nnoremap <C-w><C-]> :sp<CR>:LspDefinition<CR>
+'''
+
+## カッコ補完 foo -> (foo)
 [[plugins]]
 repo = 'machakann/vim-sandwich'
 

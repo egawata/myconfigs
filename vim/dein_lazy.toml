@@ -3,6 +3,10 @@ repo = 'deoplete-plugins/deoplete-go'
 on_ft = 'go'
 
 [[plugins]]
+repo = 'fatih/vim-go'
+on_ft = 'go'
+
+[[plugins]]
 repo = 'c9s/perlomni.vim'
 on_ft = 'perl'
 
@@ -11,19 +15,13 @@ repo = 'rcmdnk/vim-markdown'
 on_ft = 'markdown'
 
 [[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-on_ft = 'go'
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-on_ft = 'go'
-hook_add = '''
-let g:lsp_settings_servers_dir = "~/.lsp_server"
-'''
-
-[[plugins]]
 repo = 'egawata/vim-kube-explain'
 on_ft = 'yaml'
 hook_add = '''
 nnoremap <Leader>k :<C-u>KubeExplain<CR>
 '''
+
+# debugging go applications
+[[plugins]]
+repo = 'sebdah/vim-delve'
+on_ft = 'go'

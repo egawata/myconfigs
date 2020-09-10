@@ -196,7 +196,6 @@ if s:vimrc_plugin_on == s:true
 
     call dein#add('Shougo/dein.vim')
     call dein#add('Shougo/neocomplete.vim')
-    call dein#add('fatih/vim-go')
 
     " grep の高速版
     " :Ack {word} {directory}
