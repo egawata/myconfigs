@@ -3,16 +3,21 @@ repo = 'deoplete-plugins/deoplete-go'
 on_ft = 'go'
 
 [[plugins]]
-repo = 'fatih/vim-go'
-on_ft = 'go'
-
-[[plugins]]
 repo = 'c9s/perlomni.vim'
 on_ft = 'perl'
 
 [[plugins]]
 repo = 'rcmdnk/vim-markdown'
 on_ft = 'markdown'
+
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = 'go'
+hook_add = '''
+  " LSP に任せる機能を off にする
+  let g:go_def_mapping_enabled = 0
+  let g:go_doc_keywordprg_enabled = 0
+'''
 
 [[plugins]]
 repo = 'egawata/vim-kube-explain'

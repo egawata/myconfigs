@@ -55,7 +55,7 @@ hook_add = '''
   nnoremap <C-w><C-]> :sp<CR>:LspDefinition<CR>
 '''
 
-## カッコ補完 foo -> (foo)
+# カッコ補完 foo -> (foo)
 [[plugins]]
 repo = 'machakann/vim-sandwich'
 

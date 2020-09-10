@@ -76,6 +76,7 @@ autocmd FileType perl inoremap # X#
 iab pmod <esc>:r ~/.code_templates/perl_module.pl<return><esc>
 iab papp <esc>:r ~/.code_templates/perl_application.pl<return><esc>
 iab test_mysqld <esc>:r ~/.code_templates/test_mysqld.pl<return><esc>
+iab vue_tmpl <esc>:r ~/.code_templates/vue_template.html<return><esc>ggdd17G
 
 augroup special-filetype
   autocmd!
@@ -237,6 +238,8 @@ if s:vimrc_plugin_on == s:true
             \ 'build': 'cd app & yarn install' })
     call dein#add('banaoh/changed.vim')
     call dein#add('AndrewRadev/linediff.vim') " 2箇所のテキストの差分を表示
+
+    call dein#add('cespare/vim-toml')
 
     if !has('nvim')
       call dein#add('roxma/nvim-yarp')
