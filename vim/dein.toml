@@ -26,6 +26,9 @@ repo = 'glidenote/memolist.vim'
 [[plugins]]
 repo = 'neovim/nvim-lsp'
 
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+
 # vim-lsp + 非同期入力補完
 [[plugins]]
 repo = 'prabirshrestha/async.vim'
@@ -38,6 +41,10 @@ repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
+hook_add = '''
+  let g:lsp_diagnostics_enabled = 0
+  let g:lsp_log_verbose = 0
+'''
 
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
@@ -49,7 +56,7 @@ hook_add = '''
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
 hook_add = '''
-  let g:lsp_settings_servers_dir = "~/.lsp_server"
+  let g:lsp_settings_servers_dir = "~/.local/share/vim-lsp-settings/servers"
   nnoremap <C-]> :LspDefinition<CR>
   nnoremap <C-w>] :sp<CR>:LspDefinition<CR>
   nnoremap <C-w><C-]> :sp<CR>:LspDefinition<CR>

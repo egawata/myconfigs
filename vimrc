@@ -1,3 +1,5 @@
+set encoding=utf-8
+scriptencoding utf-8
 set incsearch
 set smarttab
 
@@ -31,6 +33,7 @@ set ignorecase
 set smartcase
 set backspace=indent,eol,start
 set wildignorecase
+set wrap
 filetype plugin on
 
 set ttyfast
@@ -196,7 +199,7 @@ if s:vimrc_plugin_on == s:true
     call dein#add(s:deinroot . '/repos/github.com/Shougo/dein.vim')
 
     call dein#add('Shougo/dein.vim')
-    call dein#add('Shougo/neocomplete.vim')
+    " call dein#add('Shougo/neocomplete.vim')
 
     " grep の高速版
     " :Ack {word} {directory}
@@ -219,8 +222,8 @@ if s:vimrc_plugin_on == s:true
     call dein#add('scrooloose/nerdtree')
 
     "  deoplete
-    call dein#add('Shougo/deoplete.nvim')
-    let g:deoplete#enable_at_startup = 1
+    " call dein#add('Shougo/deoplete.nvim')
+    "let g:deoplete#enable_at_startup = 1
 
     " C-k で定義済みのスニペットを貼り付ける
     call dein#add('Shougo/neosnippet.vim')
