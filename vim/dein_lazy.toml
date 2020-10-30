@@ -26,3 +26,9 @@ nnoremap <Leader>k :<C-u>KubeExplain<CR>
 [[plugins]]
 repo = 'sebdah/vim-delve'
 on_ft = 'go'
+
+# gotest-vim
+# go のテストを自動的に生成する
+[[plugins]]
+repo = 'buoto/gotests-vim'
+on_ft = 'go'
