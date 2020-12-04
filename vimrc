@@ -500,3 +500,5 @@ command! -nargs=0 Tabcr :.+1,$tabdo :q
 " NeoSnippet end
 
 autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|RESOLVED:\|QUESTION:\)')
+
+nnoremap <Leader>b :buffers<CR>

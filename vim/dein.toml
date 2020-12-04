@@ -98,3 +98,10 @@ repo = 'pechorin/any-jump.vim'
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
 
+# fzf
+# <leader>+f で起動
+[[plugins]]
+repo = 'junegunn/fzf'
+hook_add = '''
+nnoremap <Leader>f :<C-u>FZF<CR>
+'''
