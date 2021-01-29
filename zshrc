@@ -190,3 +190,12 @@ function cg() {
         fi
     fi
 }
+
+# FZF の検索対象を git ls-files の対象ファイルに制限する
+export FZF_DEFAULT_COMMAND='rg --files'
+
+# 現在のコマンドラインを vim で編集する
+# ctrl-x + e で起動
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
