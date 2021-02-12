@@ -111,7 +111,6 @@ set iskeyword+=-
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 
-noremap <F9> <esc>:tabnew<CR>
 noremap <F10> <esc>:tabprev<CR>
 noremap <F11> <esc>:tabnext<CR>
 " タグジャンプ時に別tabを開く
@@ -243,6 +242,8 @@ if s:vimrc_plugin_on == s:true
     call dein#add('AndrewRadev/linediff.vim') " 2箇所のテキストの差分を表示
 
     call dein#add('cespare/vim-toml')
+
+    call dein#add('elixir-editors/vim-elixir')
 
     if !has('nvim')
       call dein#add('roxma/nvim-yarp')

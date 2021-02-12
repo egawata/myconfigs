@@ -29,9 +29,10 @@ repo = 'neovim/nvim-lsp'
 [[plugins]]
 repo = 'neovim/nvim-lspconfig'
 
-# vim-lsp + 非同期入力補完
-[[plugins]]
-repo = 'prabirshrestha/async.vim'
+## vim-lsp + 非同期入力補完
+# vim-lsp に統合されたため不要
+#[[plugins]]
+#repo = 'prabirshrestha/async.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
