@@ -44,6 +44,8 @@ repo = 'prabirshrestha/vim-lsp'
 hook_add = '''
   let g:lsp_diagnostics_enabled = 0
   let g:lsp_log_verbose = 0
+  " vim-lsp の定義ジャンプが利用できない場合は vim 本来のタグジャンプにフォールバックする
+  nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
 '''
 
 [[plugins]]
@@ -105,3 +107,6 @@ repo = 'junegunn/fzf'
 hook_add = '''
 nnoremap <Leader>f :<C-u>FZF<CR>
 '''
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
