@@ -197,7 +197,7 @@ if s:vimrc_plugin_on == s:true
     " Required:
     call dein#add(s:deinroot . '/repos/github.com/Shougo/dein.vim')
 
-    call dein#add('Shougo/dein.vim')
+    "call dein#add('Shougo/dein.vim')
     " call dein#add('Shougo/neocomplete.vim')
 
     " grep の高速版
