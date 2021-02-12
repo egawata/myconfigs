@@ -107,6 +107,3 @@ repo = 'junegunn/fzf'
 hook_add = '''
 nnoremap <Leader>f :<C-u>FZF<CR>
 '''
-
-[[plugins]]
-repo = 'junegunn/fzf.vim'
