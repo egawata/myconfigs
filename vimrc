@@ -502,4 +502,20 @@ command! -nargs=0 Tabcr :.+1,$tabdo :q
 
 autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\|RESOLVED:\|QUESTION:\)')
 
+" ,b で :buffers コマンドを起動する
 nnoremap <Leader>b :buffers<CR>
+
+" json 等でダブルクォート等を非表示にするのをやめる
+set conceallevel=0
+
+" 2タブと4タブを切り替える
+function! s:change_tab(width)
+  execute("setlocal tabstop=" . a:width)
+  execute("setlocal softtabstop=" . a:width)
+  execute("setlocal shiftwidth=" . a:width)
+endfunction
+
+command! Tab4 call s:change_tab(4)
+command! Tab2 call s:change_tab(2)
+
+nnoremap Y yy
