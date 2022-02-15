@@ -75,6 +75,7 @@ augroup END
 
 " TODO: 目的不明。消しても問題ないか検証
 autocmd FileType perl inoremap # X#
+autocmd FileType perl setlocal iskeyword=@,48-57,_,192-255,:
 
 iab pmod <esc>:r ~/.code_templates/perl_module.pl<return><esc>
 iab papp <esc>:r ~/.code_templates/perl_application.pl<return><esc>
@@ -176,103 +177,64 @@ if len(findfile("./.development.vim", ".;")) > 0
   endfor
 endif
 
-"
-"  dein.vim
-"
-if s:vimrc_plugin_on == s:true
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
+" vim-plug
+"// PLUGIN SETTINGS
+call plug#begin('~/.config/nvim/plugged')
 
-  let s:deinroot = $HOME . "/.vim/dein"
+    Plug 'tomasr/molokai'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'preservim/nerdtree'
+    Plug 'itchyny/lightline.vim'
 
-  " Required:
-  execute("set runtimepath+=" . s:deinroot . "/repos/github.com/Shougo/dein.vim")
+    Plug 'tyru/open-browser.vim'
+    Plug 'tyru/open-browser-github.vim'
+    nmap <Space>s <Plug>(openbrowser-smart-search)
 
-  " Required:
-  if dein#load_state(s:deinroot)
-    call dein#begin(s:deinroot)
+    Plug 'egawata/sh-cmd-runner'
+    let g:sh_cmd_runner_run_cmd_key = '<S-r>'
+    let g:sh_cmd_runner_cmd_prefix = '$ '
+    let g:sh_cmd_runner_result_separator = '~~~'
 
-    " Let dein manage dein
-    " Required:
-    call dein#add(s:deinroot . '/repos/github.com/Shougo/dein.vim')
+    Plug 'glidenote/memolist.vim'
 
-    "call dein#add('Shougo/dein.vim')
-    " call dein#add('Shougo/neocomplete.vim')
+    "# Esc 押下後自動的に英数モードに切り替え
+    Plug 'brglng/vim-im-select'
+    let g:im_select_default = 'com.google.inputmethod.Japanese.Roman'
 
-    " grep の高速版
-    " :Ack {word} {directory}
-    call dein#add('mileszs/ack.vim')
+    "# gctags
+    "# f 今のファイルの関数などの一覧
+    "# j カーソル下の単語が含まれるタグの表示
+    "# d カーソル下の単語の参照元を表示
+    "# c カーソル下の単語の参照先を表示
+    Plug 'lighttiger2505/gtags.vim'
+    nnoremap <silent> <Space>f :Gtags -f %<CR>
+    nnoremap <silent> <Space>j :GtagsCursor<CR>
+    nnoremap <silent> <Space>d :<C-u>exe('Gtags '.expand('<cword>'))<CR>
+    nnoremap <silent> <Space>c :<C-u>exe('Gtags -r '.expand('<cword>'))<CR>
 
-    call dein#add('leafgarland/typescript-vim')
-    " ES6対応
-    call dein#add('othree/yajs.vim')
-    " ES7対応
-    call dein#add('othree/es.next.syntax.vim')
-    " JSX
-    call dein#add('mxw/vim-jsx')
+    " <leader>j でカーソル下単語の定義を探す
+    Plug 'pechorin/any-jump.vim'
 
-    call dein#add('mattn/webapi-vim')
-    call dein#add('mattn/gist-vim')
+    " LineDiff
+    Plug 'AndrewRadev/linediff.vim'
 
-    call dein#add('rcmdnk/vim-markdown')
-    call dein#add('tomasr/molokai')
-    call dein#add('nathanaelkane/vim-indent-guides')
-    call dein#add('scrooloose/nerdtree')
+    " lsp
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'prabirshrestha/vim-lsp'
+      let g:lsp_diagnostics_enabled = 0
+      let g:lsp_log_verbose = 0
+      " vim-lsp の定義ジャンプが利用できない場合は vim 本来のタグジャンプにフォールバックする
+      nnoremap <expr> <silent> <C-]> execute(':LspDefinition') =~ "not supported" ? "\<C-]>" : ":echo<cr>"
 
-    "  deoplete
-    " call dein#add('Shougo/deoplete.nvim')
-    "let g:deoplete#enable_at_startup = 1
+    Plug 'mattn/vim-lsp-settings'
+    let g:lsp_settings_servers_dir = "~/.local/share/vim-lsp-settings/servers"
+    nnoremap <C-]> :LspDefinition<CR>
+    nnoremap <C-w>] :sp<CR>:LspDefinition<CR>
+    nnoremap <C-w><C-]> :sp<CR>:LspDefinition<CR>
 
-    " C-k で定義済みのスニペットを貼り付ける
-    call dein#add('Shougo/neosnippet.vim')
-    call dein#add('Shougo/neosnippet-snippets')
-
-    call dein#add('tomtom/tcomment_vim')
-    call dein#add('tpope/vim-fugitive')
-
-    call dein#add('simeji/winresizer')
-
-    call dein#add('Shougo/unite.vim')
-    call dein#add('vim-perl/vim-perl')
-    call dein#add('kshenoy/vim-signature')
-    call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
-            \ 'build': 'cd app & yarn install' })
-    call dein#add('banaoh/changed.vim')
-    call dein#add('AndrewRadev/linediff.vim') " 2箇所のテキストの差分を表示
-
-    call dein#add('cespare/vim-toml')
-
-    call dein#add('elixir-editors/vim-elixir')
-
-    if !has('nvim')
-      call dein#add('roxma/nvim-yarp')
-      call dein#add('roxma/vim-hug-neovim-rpc')
-    endif
-    let g:go_def_mapping_enabled = 0
-    let g:go_doc_keywordprg_enabled = 0
-
-    let s:toml_dir = expand("~/.config/nvim")
-    call dein#load_toml(s:toml_dir . '/dein.toml', {'lazy': 0})
-    call dein#load_toml(s:toml_dir . '/dein_lazy.toml', {'lazy': 1})
-
-    " Required:
-    call dein#end()
-    call dein#save_state()
-  endif
-
-  " Required:
-  filetype plugin indent on
-  syntax enable
-
-  if dein#check_install()
-    call dein#install()
-  endif
-endif
-
-"
-"  end of dein.vim
-"
+call plug#end()
 
 "  Colorscheme
 set t_Co=256
@@ -452,19 +414,6 @@ autocmd Filetype perl nnoremap <Space>p :OpenPerldocUnderCursor<CR>
 
 if filereadable($HOME . '/.vimrc.include')
   exe 'source ' . $HOME . '/.vimrc.include'
-endif
-
-" go lsp 用の設定
-if executable('golsp')
-  augroup LspGo
-    au!
-    autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'go-lang',
-        \ 'cmd': {server_info->['golsp', '-mode', 'stdio']},
-        \ 'whitelist': ['go'],
-        \ })
-    autocmd FileType go setlocal omnifunc=lsp#complete
-  augroup END
 endif
 
 " カーソル下のファイルを開く
