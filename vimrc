@@ -234,6 +234,22 @@ call plug#begin('~/.config/nvim/plugged')
     nnoremap <C-w>] :sp<CR>:LspDefinition<CR>
     nnoremap <C-w><C-]> :sp<CR>:LspDefinition<CR>
 
+    " go の最低限の設定
+    Plug 'mattn/vim-goimports'
+
+    Plug 'rcmdnk/vim-markdown'
+
+    Plug 'APZelos/blamer.nvim'
+
+    " nerdtree に grep(g)コマンドを追加する
+    Plug 'MarSoft/nerdtree-grep-plugin'
+
+    " window サイズを hjkl で変更(Ctrl-s)
+    Plug 'simeji/winresizer'
+    let g:winresizer_vert_resize = 1
+    let g:winresizer_horiz_resize = 1
+    let g:winresizer_start_key = '<C-s>'
+
 call plug#end()
 
 "  Colorscheme
@@ -320,10 +336,6 @@ noremap <Space>G "zyiw:tabnew<CR>:e ggrep_dummy<CR>:Ggrep <C-r>z \| cwin<CR>
 
 nnoremap x "_x
 nnoremap s "_s
-" winresizer
-let g:winresizer_vert_resize = 1
-let g:winresizer_horiz_resize = 1
-let g:winresizer_start_key = '<C-s>'
 
 augroup HighlightTrailingSpaces
   autocmd!
